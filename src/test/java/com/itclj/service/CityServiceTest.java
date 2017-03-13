@@ -20,7 +20,7 @@ public class CityServiceTest {
   @Test
   public void save() {
     CityBean cityBean = new CityBean();
-    cityBean.setCity("城市名称04");
+    cityBean.setCity("城市名称05");
     cityBean.setCountryId((short) 1);
     cityService.save(cityBean);
   }
