@@ -3,8 +3,10 @@ package com.itclj.dao;
 import com.itclj.model.CityBean;
 import com.itclj.model.CityBeanExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CityBeanMapper {
     long countByExample(CityBeanExample example);
 
