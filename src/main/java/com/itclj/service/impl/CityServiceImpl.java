@@ -24,4 +24,8 @@ public class CityServiceImpl implements CityService {
       return cityBeanMapper.updateByPrimaryKey(cityBean)>0?true:false;
     }
   }
+
+  public CityBean findById(Short id) {
+    return cityBeanMapper.selectByPrimaryKey(id);
+  }
 }

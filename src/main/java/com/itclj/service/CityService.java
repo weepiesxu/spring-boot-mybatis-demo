@@ -9,9 +9,12 @@ public interface CityService {
 
   /**
    * 保存
-   * @param cityBean
-   * @return
    */
   Boolean save(CityBean cityBean);
+
+  /**
+   * 按照ID获取
+   */
+  public CityBean findById(Short id);
 
 }
