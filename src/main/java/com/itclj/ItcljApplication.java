@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * Created by lujun.chen on 2017/3/10.
  */
-@ComponentScan
 @SpringBootApplication
 public class ItcljApplication {
 
