@@ -115,7 +115,7 @@ public class IController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(new Date()));
         System.out.println("照片注册回调：--------" + JsonUtil.toString(map));
-        contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\setImgRegCallBack.txt");
+        //contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\setImgRegCallBack.txt");
         return new ContentResult<Map<String, Object>>("SUS_001", map);
     }
 
@@ -211,6 +211,8 @@ public class IController {
         return new ContentResult<Map<String, Object>>("SUS_rzbd", map);
     }
 
+
+
     @RequestMapping(value = "/xcy/rzbd1")
     public ContentResult<Map<String, Object>> setrzbdCallBack(String deviceName, String name, String sex, String nation, String birthday, String idNum, String address, String idNo, String issuingOrgan, String usefulLife, String photoPath, String recordPhotoPath, String createTime, String compareResult) {
         Map<String, Object> map = new HashMap<>();
@@ -233,5 +235,42 @@ public class IController {
         System.out.println("人证比对回调：--------" + JsonUtil.toString(map));
         //contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\setImgRegCallBack.txt");
         return new ContentResult<Map<String, Object>>("SUS_001", map);
+    }
+    @RequestMapping(value = "/xcy/gs")
+    public ContentResult<Map<String, Object>> setGsCallBack(String deviceKey, String personGuid, String showTime, String photoUrl, String type, String data, String recMode, String idCardInfo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("deviceKey", deviceKey);
+        map.put("personGuid", personGuid);
+        map.put("showTime", showTime);
+        map.put("photoUrl", photoUrl);
+        map.put("type", type);
+        map.put("data", data);
+        map.put("recMode", recMode);
+        map.put("idCardInfo", idCardInfo);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+        System.out.println("沃土回调：--------" + JsonUtil.toString(map));
+        //contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\setImgRegCallBack.txt");
+        return new ContentResult<Map<String, Object>>("SUS_001", map);
+    }
+
+    @RequestMapping(value = "/xcy/gs1")
+    public ContentResult<Map<String, Object>> GsCallBack2Json(@RequestBody RecognitionGS callBack) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("deviceKey", callBack.getDeviceKey());
+        map.put("personGuid", callBack.getPersonGuid());
+        map.put("showTime", callBack.getShowTime());
+        map.put("photoUrl", callBack.getPhotoUrl());
+        map.put("type", callBack.getType());
+        map.put("data", callBack.getData());
+        map.put("recMode", callBack.getRecMode());
+        map.put("idCardInfo",callBack.getIdCardInfo());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+        System.out.println("识别回调json：--------" + JsonUtil.toString(map));
+        //contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\IdentifyCallBack2Json.txt");
+        return new ContentResult<Map<String, Object>>("SUS_rzbd", map);
     }
 }
