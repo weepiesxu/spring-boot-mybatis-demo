@@ -2,6 +2,7 @@ server:
   port: 8888
   tomcat:
       uri-encoding: UTF-8
+      max-http-header-size: 102400
 spring:
   aop:
     auto: true
