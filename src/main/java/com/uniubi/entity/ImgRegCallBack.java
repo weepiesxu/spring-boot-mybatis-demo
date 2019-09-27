@@ -12,6 +12,15 @@ public class ImgRegCallBack {
     private String ip;
     private String featureKey;
     private String feature;
+    private String base64Feature;
+
+    public String getBase64Feature() {
+        return base64Feature;
+    }
+
+    public void setBase64Feature(String base64Feature) {
+        this.base64Feature = base64Feature;
+    }
 
     public String getDeviceKey() {
         return deviceKey;

@@ -11,6 +11,12 @@ public class wo_IdentifyCallBack {
     private String type;
     private Long showTime;
     private String cardNo;
+    private String recMode;
+    private String aliveType;
+    private String idCardInfo;
+    private String photoUrl;
+    private String passTimeType;
+    private String permissionTimeType;
 
     public String getPassTimeType() {
         return passTimeType;
@@ -37,12 +43,7 @@ public class wo_IdentifyCallBack {
         this.photoUrl = photoUrl;
     }
 
-    private String recMode;
-    private String aliveType;
-    private String idCardInfo;
-    private String photoUrl;
-    private String passTimeType;
-    private String permissionTimeType;
+
 
     public String getDeviceKey() {
         return deviceKey;

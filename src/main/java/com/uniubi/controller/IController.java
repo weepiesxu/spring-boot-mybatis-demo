@@ -122,43 +122,47 @@ public class IController {
         System.out.println(result);
     }
 
-
+    Map<String, Object> featuremap = new HashMap<>();
     @RequestMapping(value = "/xcy/test1")
-    public ContentResult<Map<String, Object>> getImgRegCallBack(String deviceKey, String personId, Long time, String imgPath, String faceId, String ip, String featureKey, String feature) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("deviceKey", deviceKey);
-        map.put("personId", personId);
-        map.put("time", time);
-        map.put("imgPath", imgPath);
-        map.put("faceId", faceId);
-        map.put("ip", ip);
-        map.put("featureKey", featureKey);
-        map.put("feature", feature);
+    public ContentResult<Map<String, Object>> getImgRegCallBack(String deviceKey, String personId, Long time, String imgPath, String faceId, String ip, String featureKey, String feature,String base64Feature) {
+
+        featuremap.put("deviceKey", deviceKey);
+        featuremap.put("personId", personId);
+        featuremap.put("time", time);
+        featuremap.put("imgPath", imgPath);
+        featuremap.put("faceId", faceId);
+        featuremap.put("ip", ip);
+        featuremap.put("featureKey", featureKey);
+        featuremap.put("feature", feature);
+        featuremap.put("base64Feature", base64Feature);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(new Date()));
-        System.out.println("照片注册回调：--------" + JsonUtil.toString(map));
-        //contentToTxt(JsonUtil.toString(map), "C:\\Users\\uniubi\\Desktop\\callback\\getImgRegCallBack.txt");
-        return new ContentResult<Map<String, Object>>("SUS_001", map);
+        System.out.println("照片注册回调：--------" + JsonUtil.toString(featuremap));
+
+
+
+        return new ContentResult<Map<String, Object>>("SUS_001", featuremap);
     }
 
 
 
     @RequestMapping(value = "/xcy/test5")
     public ContentResult<Map<String, Object>> getImgRegCallBack2Json(@RequestBody ImgRegCallBack imgRegCallBack) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("deviceKey", imgRegCallBack.getDeviceKey());
-        map.put("personId", imgRegCallBack.getPersonId());
-        map.put("time", imgRegCallBack.getTime());
-        map.put("imgPath", imgRegCallBack.getImgPath());
-        map.put("faceId", imgRegCallBack.getFaceId());
-        map.put("ip", imgRegCallBack.getIp());
-        map.put("featureKey", imgRegCallBack.getFeatureKey());
-        map.put("feature", imgRegCallBack.getFeature());
+
+        featuremap.put("deviceKey", imgRegCallBack.getDeviceKey());
+        featuremap.put("personId", imgRegCallBack.getPersonId());
+        featuremap.put("time", imgRegCallBack.getTime());
+        featuremap.put("imgPath", imgRegCallBack.getImgPath());
+        featuremap.put("faceId", imgRegCallBack.getFaceId());
+        featuremap.put("ip", imgRegCallBack.getIp());
+        featuremap.put("featureKey", imgRegCallBack.getFeatureKey());
+        featuremap.put("feature", imgRegCallBack.getFeature());
+        featuremap.put("base64Feature", imgRegCallBack.getBase64Feature());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(new Date()));
-        System.out.println("照片注册回调json：--------" + JsonUtil.toString(map));
+        System.out.println("照片注册回调json：--------" + JsonUtil.toString(featuremap));
 
-        return new ContentResult<Map<String, Object>>("SUS_005", map);
+        return new ContentResult<Map<String, Object>>("SUS_005", featuremap);
     }
 
     @RequestMapping(value = "/xcy/test4")
@@ -244,6 +248,8 @@ public class IController {
 
         return new ContentResult<Map<String, Object>>("SUS_001", map);
     }
+
+    AtomicInteger i = new AtomicInteger(0);
     @RequestMapping(value = "/xcy/gs")
     public ContentResult<Map<String, Object>> getGsCallBack(String deviceKey, String personGuid, String showTime, String photoUrl, String type, String data, String recMode, String idCardInfo) {
         Map<String, Object> map = new HashMap<>();
@@ -282,7 +288,7 @@ public class IController {
         return new ContentResult<Map<String, Object>>("SUS_rzbd", map);
     }
 //deviceKey、personGuid、faceGuid、appId、state、msg和time
-    AtomicInteger i = new AtomicInteger(0);
+AtomicInteger j = new AtomicInteger(0);
     @RequestMapping(value = "/xcy/gspic")
     public ContentResult<Map<String, Object>> getPicRegisterCallBack(String deviceKey, String personGuid, String faceGuid, String appId, String state, String msg, String time) {
         Map<String, Object> map = new HashMap<>();
@@ -297,9 +303,9 @@ public class IController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(new Date()));
 
-        i.incrementAndGet();
+        int num=j.incrementAndGet();
         System.out.println("沃土照片下发状态回调：--------" + JsonUtil.toString(map));
-        System.out.println("回调次数：--------" + i.get());
+        System.out.println("回调次数：--------" + num);
 
         return new ContentResult<Map<String, Object>>("SUS_001", map);
     }
@@ -429,9 +435,47 @@ public class IController {
 
         return new ContentResult<Map<String, Object>>("SUS_003", map);
     }
+    AtomicInteger k = new AtomicInteger(0);
+    @RequestMapping(value = "/wo/test6")
+    public ContentResult<Map<String, Object>> woAuthCallback2Json(@RequestBody wo_authCallback callBack) {
+        Map<String, Object> map = new HashMap<>();
 
+        map.put("deviceKey", callBack.getDeviceKey());
+        map.put("personGuid", callBack.getPersonGuid());
+        map.put("faceGuid", callBack.getFaceGuid());
+        map.put("deviceType", callBack.getDeviceType());
+        map.put("guid", callBack.getGuid());
+        map.put("state", callBack.getState());
+        map.put("type", callBack.getType());
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+        int num=k.incrementAndGet();
+        System.out.println("wo设备授权回调：--------" + JsonUtil.toString(map));
+        System.out.println("回调次数：--------" + num);
+        return new ContentResult<Map<String, Object>>("SUS_003", map);
+    }
 
+    AtomicInteger m = new AtomicInteger(0);
+    @RequestMapping(value = "/wo/test7")
+    public ContentResult<Map<String, Object>> woAuthCallback(String deviceKey , String personGuid, String faceGuid, String deviceType, String guid, String state,String type) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("deviceKey", deviceKey);
+        map.put("personGuid", personGuid);
+        map.put("faceGuid", faceGuid);
+        map.put("deviceType", deviceType);
+        map.put("guid", guid);
+        map.put("state", state);
+        map.put("type", type);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+        int num=m.incrementAndGet();
+        System.out.println("wo设备授权回调：--------" + JsonUtil.toString(map));
+        System.out.println("回调次数：--------" + num);
+        return new ContentResult<Map<String, Object>>("SUS_003", map);
+    }
     @RequestMapping(value = "/xiaomai/test1")
     public ContentResult<Map<String, Object>> getTaskProcessingResultsjson(@RequestBody TaskProcessingResults taskProcessingResults) {
         Map<String, Object> map = new HashMap<>();
@@ -465,21 +509,30 @@ public class IController {
 
 
     @RequestMapping(value = "/xiaomai/test2")
-    public String getTaskInterface( ) {
+    public Map<String, Object>  getTaskInterface( ) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Map<String, Object> map = new HashMap<>();
-        map.put("taskNo", "111");
-        map.put("interfaceName", "person/create");
+        map.put("taskNo", "123");
+        map.put("interfaceName", "face/featureReg");
+        map.put("personId", "123");
+        map.put("faceId", "");
         map.put("result", true);
-        map.put("person", "{\"name\": \"紫微\",\"idcardNum\": \"511323199204250562\",\"id\": \"\"}");
+
+        String feature = (String) featuremap.get("feature");
+        feature=feature.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
+        feature= feature.replaceAll("\\+", "%2B");
+        map.put("feature",feature);
+
+        map.put("base64Feature",featuremap.get("base64Feature") );
+        map.put("featureKey",featuremap.get("featureKey") );
 
 
         System.out.println(sdf.format(new Date()));
         System.out.println("设备执行任务：--------" + JsonUtil.toString(map));
 
-        return JsonUtil.toString(map);
+        return map;
     }
     @RequestMapping(value = "/xiaomai/test22")
     public ContentResult<Map<String, Object>> getTaskInterface( @RequestBody  BaseTaskInterface taskInterface) {
